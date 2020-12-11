@@ -1,0 +1,63 @@
+12-11-2020 4:30pm
+- Querying Data from PostgreSQL:
+    - SQL platforms comply with ANSI standards
+    - Uppercase Postgres keywords is a general best practice
+    - "Explicit notation" - specifying exactly the columns you want to return.
+    - <> - not equals operator
+    - "LIKE" Wildcards
+        - % - zero or more characters
+        - _ - exactly one character
+    - NULL value
+        - Arithmetic operations that include null value will always return a null value.
+    - BETWEEN keyword can be useful for finding values in a range
+        - Inclusive upper and lower bounds
+    - IN - replaces multiple OR statements
+        - EX: WHERE first_name IN ("Jimmy", "Emma", "Lorrie")
+        - Cannot be used with LIKE
+    - AND expression has higher operator precedence to OR, ANDs will always run first (without parenthesis)
+    - JOINS (5):
+        - INNER JOIN - must have a match in both tables to return a row
+        - JOIN - defaults to inner join
+        - Ommitting JOIN keywords and just listing tables after FROM also implies a join (not recommended)
+            - EX:
+            [sql]
+                FROM customers,
+                     orders
+                WHERE customers.customer_id = orders.customer_id
+            [end]
+        - OUTER JOIN - either LEFT or RIGHT
+            - Crappy text vinn diagram for refrence below
+                ( TABLE A ( ) TABLE B )
+            - LEFT OUTER JOIN - returns all records from left (table A) along with matching records from the right (B)
+            - RIGHT OUTER JOIN - returns all records from right (B) along with matching records from (A)
+            - Columns (that are explicitly selected) in rows that don't have a join match will return null values for those columns.
+            - OUTER not necessary but more verbose
+        - FULL (OUTER) JOIN - returns all rows whether a match exists or not
+            - Columns where the match is not present will be nulled out.
+    - Presenting and Aggregating (6):
+        - By default, data is returned in the order it is stored.
+        - Default order by is ascending
+        - Sorting by multiple columns 
+            - EX:
+            [sql]
+                  SELECT name, state
+                  FROM residency
+                  ORDER BY state DESC, name ASC
+            [end]
+            - can also use position order number instead of column number
+                - i.e., "ORDER BY 2 DESC, 1 ASC"
+        - Aggregate functions
+            - AVG(column) - average
+            - If you use an aggregate field with other regular columns, you must include the other fields in a GROUP BY clause
+                - This tells Postgres how to group the results by the value of the other columns.
+            - HAVING - clause specifies that we want to filter aggregate values (for instance, averages, AVG)
+                - EX:
+                [sql]
+                    SELECT carrier, AVG(departure_delay), AVG(arrival_delay)
+                    FROM airline_performance
+                    GROUP BY carrier
+                    HAVING AVG(departure_delay) > 15
+                        AND AVG(arrival_delay) > 15;
+                [end]
+            
+        
