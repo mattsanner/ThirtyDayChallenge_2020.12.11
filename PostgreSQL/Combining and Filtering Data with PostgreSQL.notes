@@ -1,0 +1,74 @@
+START TIME 12-12-2020 3:35pm
+- 2 Working with String Functions:
+    - Data types are not immutable - can be changed, reassigned and converted in-query
+    - string data - CHAR, VARCHAR, TEXT
+        - CHAR - fixed length string
+            - Length defined upon creation
+            - If value is shorter than length, the remaining space is filled with blanks
+        - VARCHAR - variable length string
+            - Table definition provides max length of filled
+            - Field only holds data assigned to it (no padding)
+        - TEXT - almost identical to VARCHAR, but no max length is defined
+            - Theoretically unlimited length
+    - Concat methods:
+        - Operator: ||
+            - EX: field1 || ', ' || field2
+            - ANSI compliant operator (works on all SQL platforms)
+        - Function: CONCAT(field1, ', ', field2)
+        - Separator Function: CONCAT_WS(', ', field1, field2)
+        - Query example:
+            [sql]
+            SELECT city || ', ' || state AS location,
+                   population
+            FROM population
+            WHERE city = 'Louisville';
+            [end]
+    - Trim methods:
+        - TRIM(' radar ') - trims whitespace
+        - TRIM('r' FROM 'radar') - removes 'r' from 'radar'
+        - TRIM(LEADING 'r' FROM 'radar') - LEADING or TRAILING keyword specifies which 'r' to remove
+    - Isolating methods:
+        - SELECT LEFT('Pluralsight', 6) - 'Plural'
+        - SELECT RIGHT('Pluralsight', 5) - 'sight'
+        - SPLIT_PART('USA/DC/202', '/', 2); - 'DC'
+            - Splits field into components by delimiter, returning the specified index
+        - SUBSTRING('USA/DC/202', 5, 2) - 'DC'
+            - Returns a substring from the field
+            - Specify starting position (starts at 1), length
+        - SUBSTRING('USA/DC/202' FROM 5 FOR 2) - same as above
+            - If length is not specified, will return from starting position to the end.
+    - Change case methods:
+        - LOWER, UPPER, INITCAP (upper case initial letter of each word)
+    - Changing character methods:
+        - REPLACE(street, 'Ave.', 'Avenue') - replaces 'Ave.' with 'Avenue' wherever it occurs in the result
+        - REVERSE('Test') - 'tseT'
+- 3 Aggregating Functions:
+    - Types:
+        - Integer - calcuations perform very quickly with ints.
+        - EX:
+            SELECT 13/2 = 6
+            SELECT 12/2::FLOAT = 6.5
+        - Numeric (good for money)
+            - Exact quantity
+            - Precision and scale can be specified with creation
+        - Floating point (avoid in WHERE clause because of inprecision)
+            - Inexact, variable precision Numeric
+            - Real - 6 digit precision
+            - Double - 15 digit precision
+            - Float - inexact SQL standard
+    - Numeric operators:
+        - SELECT 12 ^ 2;  144
+        - |/ - square root, i.e.: SELECT |/ 36;  6
+        - @ - absolute value, i.e.: SELECT @ (36-40); 4
+        - Above are postgres specific, there are supported ANSI functions as well (ABS, MOD, POWER, SQRT)
+    - Aggregate functions:
+        - COUNT, SUM, AVG, MIN, MAX
+        - Can pass DISTINCT into aggregates
+        [sql]
+            SELECT COUNT(DISTINCT grade_lvl)
+            FROM Person
+        [end]
+        - Remember to use group by for non-aggregate columns, when using aggregate functions in a SELECT
+    - Reminder - HAVING can be used to filter on aggregate value calculations.
+        - Always follows GROUP by
+STOPPED 12.12.2020 - 4:21PM
