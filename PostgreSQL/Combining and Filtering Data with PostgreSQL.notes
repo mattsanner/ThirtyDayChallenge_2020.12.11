@@ -71,5 +71,24 @@ START TIME 12-12-2020 3:35pm
         - Remember to use group by for non-aggregate columns, when using aggregate functions in a SELECT
     - Reminder - HAVING can be used to filter on aggregate value calculations.
         - Always follows GROUP by
-STOPPED 12.12.2020 - 4:21PM
-Edit for mattsanner commit
+STOP 12.12.2020 - 4:21PM
+TODO: Fix git push account
+
+START 12.13.2020 7:15pm
+- 5 Introducing Set Theory
+    - Mathematical concept describing a collection of elements that are unduplicated, unordered
+    - Results of a query can be considered a set
+    - SQL sets must have the same number of columns with the same types across tables
+    - Set operators
+        - ( TABLE A ( ) TABLE B )
+        - Union
+            - Returns results both data sets
+            - Removes any duplicate rows
+                - using ALL keyword returns duplicates
+        - Intersect
+            - Returns results from multiple queries as one result set ONLY if record appears in each result set
+            - Removes any duplicate rows unless all is 
+        - Except
+            - Returns records that only exist in TABLE A
+    - ALL is essentially the opposite of DISTINCT
+STOP 7:42pm
