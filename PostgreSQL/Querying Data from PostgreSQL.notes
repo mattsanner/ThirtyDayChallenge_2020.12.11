@@ -60,4 +60,122 @@ START TIME 12-11-2020 4:30pm
                         AND AVG(arrival_delay) > 15;
                 [end]
 END TIME - 5:50pm
-        
+START TIME - 10:00PM
+    - 6 Implementing Subqueries:
+        - Subquery guidelines:
+            - A subquery occurs in the SELECT,FROM, or WHERE clause
+            - Can use comparison operators or multiple-row operators (such as IN)
+            - Subquery executes before outer query
+                - Advanced queries can contain nested subqueries
+        - Subquery vs join
+            - Primary purpose of a join is to combine rows from tables based on a match condition
+            - A subquery returns a single value (scalar) or row set that is immediately available in the outer query
+            - EX:
+            [sql]
+                SELECT a.store_name,
+                       a.store_location
+                FROM stores a
+                WHERE a.store_name IN
+                    (SELECT store_name
+                    FROM orders
+                    WHERE order_value > 500);
+                
+                SELECT a.store_name
+                       a.store_location
+                FROM stores a
+                INNER JOIN orders b
+                    ON a.store_name = b.store_name
+                WHERE b.order_value > 500;
+            [end]
+        - Correlated subquery
+            - A subquery that uses values from the primary query
+            - Subquery is evaluated for each row processed by the primary query
+        - Uncorrelated (regular) subquery is relied on by the primary query (the opposite of a correlated subquery)
+        - Subqueries are best used for aggregation and membership questions
+    - 7 Simplifying Queries with Common Table Expressions:
+        - Creates result sets that can be referenced in subsequent queries
+        - Promotes readability and interpretability in otherwise complex queries
+        - Can reference a CTE multiple times throughout a query statment
+        - CTEs defined using the WITH keyword
+        - Logic is specified following the AS keyword
+        - CTEs are defined before a query statement, where it is referenced by name
+        - Recursive CTEs:
+            - CTE calls itself until a certain condition is met
+            - Can be used to create series or work with hierarchical data
+            - Similar to a FOR loop concept
+            - Uses RECURSIVE keyword
+    - 8 Limiting Results with Window Functions:
+        - A window is a set of table rows over which the function is applied
+            - Rows must be somehow related
+        - Window Function Syntax
+            - OVER() clause - defines the set of rows to which the function is applied
+            - PARTITION BY - rows are partitioned to form groups of rows
+            - ORDER BY - same as usual
+        - Numbering rows
+            - ROW_NUMBER() - assigns a sequential number to each row
+            - If OVER () is empty, window is applied to all rows
+        - EX:
+        Table:  | name   | course         |
+                | Jason  | Accounting     |
+                | Lucy   | Health Science |
+                | Martha | Biology        |
+                | Lucy   | Architecture   |
+                | Jason  | Economics      |
+        [sql]
+        SELECT name, course,
+            ROW_NUMBER() OVER (
+                PARTITION BY name
+                ORDER BY course
+            ) AS rn
+        FROM enrollees;
+        [end]
+        Results : | name   | course         | rn |
+                  | Jason  | Accounting     | 1  |
+                  | Jason  | Economics      | 2  |
+                  | Lucy   | Architecture   | 1  |
+                  | Lucy   | Health Science | 2  |
+                  | Martha | Biology        | 1  |
+        - Ranking Rows
+            - RANK() assigns a sequential row number
+                - Matching rows are equally ranked (tied)
+            - DENSE_RANK() - avoids gaps in ranking
+            - EX: (using above table and results)
+            | name   | rank | d_rank | rn |
+            | Jason  | 1    | 1      | 1  |
+            | Jason  | 1    | 1      | 2  |
+            | Lucy   | 3    | 2      | 3  |
+            | Lucy   | 3    | 2      | 4  |
+            | Martha | 5    | 3      | 5  |
+        - Special value funtions:
+            - FIRST_VALUE() - self explanatory
+            - LAST_VALUE() - self explanatory
+            - LAG() - The row above the current row
+            - LEAD() - The row after the current row
+        - WINDOW <alias name> AS ( ... ) can be used to reference a window multiple times in a query
+        - Aggregate functions can be used as window functions
+            - Rows in the data maintain their separate identity (rather than collapsing)
+            - Helpful for performing a subsequent calculation on the data
+            - EX: 
+                AVG(age) OVER (PARTITION BY grade_lvl) AS avg_age
+        - Order of Evalution:
+            - Window functions are evaluated after joins, grouping, and having clauses
+            - Window functions are evaluated at the same time as other SELECT statements
+            - To use other selections in a window function
+                - Use a CTE or subquery
+                - Apply a window function in outer query
+            - Window functions may be used in calculations in SELECT statements
+            - Window functions may not be used in WHERE or HAVING clauses
+            - EX:
+            [sql]
+                SELECT a.first_name,
+                       a.last_name
+                FROM (SELECT first_name, last_name,
+                             ROW_NUMBER() OVER (
+                                 PARTITION BY dept
+                                 ORDER BY last_name)
+                                 AS rn
+                        FROM students) a
+                WHERE rn = 1
+            [end]
+    - 9 Wrapping Up:
+        - 

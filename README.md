@@ -2,7 +2,7 @@
 
 PostgreSQL Path
 - [x] Querying Data from PostgreSQL - 12.11.2020
-- [started] Combining and Filtering Data with PostgreSQL
+- [x] Combining and Filtering Data with PostgreSQL
 - [ ] PostgreSQL Data Manipulation Playbook
 - [ ] Capturing Logic with Custom Functions In PostgreSQL
 - [ ] PostgreSQL Functions Playbook
