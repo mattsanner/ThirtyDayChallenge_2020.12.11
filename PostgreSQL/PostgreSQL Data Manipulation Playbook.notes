@@ -1,0 +1,57 @@
+START 9:32PM 2020.12.15
+- 2 Understanding SQL Sublanguages:
+    - Verbose categorization scheme
+        - Data definition language (DDL)
+            - Statements (CREATE ALTER DROP)
+            - Object (DATABASE, SCHEMA, TABLE, TRIGGER, PROCEDURE, FUNCTION, INDEX, etc.)
+        - Data Control language (DCL)
+            - Helps manage security
+            - Statements (GRANT, REVOKE)
+            - Permissions (SELECT, INSERT, UPDATE, DELETE, CREATE, ALL)
+            - OBJECT (ON, (object))
+            - ROLE (TO, FROM), (PUBLIC, CURRENT_USER, SESSION_USER)
+            - EX:
+            [sql]
+                GRANT SELECT ON Orders TO PUBLIC;
+                GRANT ALL ON Orders TO Administrators;
+            [end]
+        - Data Query language (DQL)
+            - Sublanguages used to return data to the client
+            - RETURNING, SELECT,
+        - Data Manipulation language (DML)
+            - Main focus of course
+            - Sometimes contains SELECT (not here)
+            - INSERT, UPDATE, DELETE
+        - Data Transaction language (DTL)
+            - BEGIN | START (synonomous)
+            - WORK | TRANSACTION (synonomous)
+            - SAVEPOINT (save state)
+            - COMMIT or ROLLBACK
+    - Imperative Constructs
+        - Programming Paradigms
+            - Declarative (WHAT)
+                - Programmer declars properties of the desired result, not how to compute it
+            - Imperative (HOW)
+                - Programmer tells machine how to change its state
+        - Imperative
+            - Flow control - cases, loops, continue/exit, GOTO, etc.
+            - Variables - DECLARE
+            - Error handling - RAISE NOTICE, EXCEPTION, WHENEVER
+            - Management - SET, backups, replication, stats, VACUUM?
+- 3 What Are Concurrency Challenges?
+    - ACID Properties Guarantees
+        - Atomicity - Indivisible and irreducible series of database operations
+        - Consistency - Changes to the database allowed from one valid state to another
+        - Isolation - when and how changes become visible to others
+            - Pessimistic - assume there will be conflicts, so take measures to prevent it
+            - Optimistic - Assume conflicts are rare, but require validity check before committing
+        - Durability - Committed changes survive permanently
+- 4 Understanding ANSI Concurrency Phenomena
+    - Lost Update - If two transaction overlap updating the same data
+        - Not possible in PostgreSQL
+    - Dirty Read - A read occurs during a write transaction that is later rolled back
+        - Prevented by isolated trsactions (cannot happen in PostgreSQL)
+    - Non-repeatable read - The state of data changes while work is being done
+        - i.e. a salary changes while payroll is being processed
+    - Phantom rows - Rows appear in sequential SELECTS if work is done by another thread.
+END 10:10pm
