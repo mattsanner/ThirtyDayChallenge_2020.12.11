@@ -55,3 +55,27 @@ START 9:32PM 2020.12.15
         - i.e. a salary changes while payroll is being processed
     - Phantom rows - Rows appear in sequential SELECTS if work is done by another thread.
 END 10:10pm
+START 8:52pm 2020.12.16
+- 5 How ANSI Isolation levels Solve Concurrency Challenges:
+    - READ UNCOMMITTED:
+        - All concurrency phenomena are permitted
+            - Dirty reads, non-repeatable reads, phantom rows
+        - Not supported in PostgreSQL
+    - READ COMMITTED:
+        - Prevents dirty reads, NRR and Phantom rows are still permitted
+        - Supported in PostgreSQL
+        - A snapshot is created per READ
+    - REPEATABLE READ:
+        - Prevents dirty reads and non-repeatable reads, phantom rows are still permitted
+        - Snapshot is created at the first read in a transaction, persists until transaction is committed.
+    - Restrictive Isolation Levels:
+        - The more restrictive the isolation level, the more expensive in terms of concurrency and performance
+        - Read uncommitted (least expensive_) to serializable (most expensive)
+    - SERIALIZABLE:
+        - Most restrictive, most isolated
+        - Prevents all three phenomena above
+        - Serialization anomalies - out of scope of the course
+    - Takeaways:
+        - Isolation strategy is a crucial part of app design and will have a detrimental impact on data Consistency
+        - Different areas of an app have different isolation requirements
+END 9:05pm
