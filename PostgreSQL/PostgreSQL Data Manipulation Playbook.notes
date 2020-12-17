@@ -79,3 +79,64 @@ START 8:52pm 2020.12.16
         - Isolation strategy is a crucial part of app design and will have a detrimental impact on data Consistency
         - Different areas of an app have different isolation requirements
 END 9:05pm
+START 10:40pm 2020.12.16
+- 6 Using Transaction Control language:
+    - COMMIT, COMMIT WORK, COMMIT TRANSACTION - all the same
+    - ROLLBACK, "", "" - similarly synonomous
+    - Cannot nest transactions, if attempted the inner transaction is ignored, and a warning is flagged
+    - Set session characteristics before beginning a transaction
+    - Transaction save points
+        - Keyword SAVEPOINT <name>
+        - ROLLBACK TO SAVEPOINT <name> - rolls back to given points
+    - DDL statements are fully transactional (for the most part)
+    - SHOW transaction_isolation; - reads out the current isolation level;
+- 7 Inserting Data with the INSERT Statement:
+    - Insert syntax - INSERT INTO - mandatory for Postgres, not fully mandatory in other languages
+    - The VALUES () can be replaced by a SELECT expression that satisfies the column count of the table
+    - Two types of DEFAULTS
+        - Serial and Sequence types
+        - DEFAULT constraint
+    - OVERRIDING { SYSTEM | USER } VALUE - can be used to overrule a default value
+        - EX:
+        [sql]
+            INSERT INTO T (Identity_Column, Unique_Column, Constraint_Column)
+            OVERRIDING SYSTEM VALUE
+            VALUES (12, 7, 7);
+        [end]
+        Allows for 12 to be inserted overriding the serial incrementer.
+    - Can also use DEFAULT keyword in VALUE ( ) to explicitly use the default value
+    - Insert through a view:
+        - PostgreSQL doesn't allow INSERT into a CTE
+        - Updateable views:
+            - Must not contain
+                - More than one table or updateable view in FROM
+                - WITH, DISTINCT, GROUP BY, HAVING, LIMIT, or OFFSET clauses
+                - UNION, INTERSECT, or EXCEPT
+                - Aggregates, window functions or set-returning functions in the SELECT list
+    - Handling Contraint Conflicts:
+        - ON CONFLICT [ (if not DO NOTHING) Constraint definition] { DO NOTHING | DO UPDATE SET ... }
+        - EX:
+            [sql]
+                INSERT INTO T (Unique_Column, Constraint_Column)
+                VALUES (300, 999),
+                       (500, 999)
+                ON CONFLICT (Unique_Column)
+                DO UPDATE SET Constraint_Column = EXCLUDED.Constraint_Column;
+            [end]
+    - Using RETURNING:
+        - Auditing example:
+            [sql]
+                WITH INSERT_CTE AS
+                (
+                    INSERT INTO T (Unique_Column, Constraint_Column)
+                    VALUES (300, 999),
+                       (500, 999)
+                    ON CONFLICT (Unique_Column)
+                    DO UPDATE SET Constraint_Column = EXCLUDED.Constraint_Column;
+                    RETURNING *
+                )
+                SELECT *, NOW() AS InsertTime, current_user AS InsertUser
+                INTO audit_table
+                FROM INSERT_CTE;
+            [end]
+STOP 11:16pm
