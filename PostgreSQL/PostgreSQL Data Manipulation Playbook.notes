@@ -140,3 +140,45 @@ START 10:40pm 2020.12.16
                 FROM INSERT_CTE;
             [end]
 STOP 11:16pm
+START 10:23pm 2020.12.17
+- 8 Using the UPDATE Statement:
+    - Can use RETURNING from UPDATE statements
+    - Can set values to the result of a non-correlated subquery
+    - Using FROM in UPDATE helps defined the scope of the update when joining across tables
+    [sql]
+        UPDATE Orders AS O1
+        SET OrderDate = CASE
+                            WHEN E.Salary >= 50000 THEN OrderDate + 1
+                            WHEN E.Salary <= 49000 THEN OrderDate - 1
+                        END
+        FROM Employees AS E
+        WHERE E.Employee = O1.Employee
+            AND (E.Salary >= 50000 OR E.Salary <= 49000);
+    [end]
+    - A View can be a target of an UPDATE
+        - UPDATE View_Name <same as usual>
+- 9 Deleting Data Using the DELETE Statement:
+    - DELETE FROM [ ONLY ] Table [ * ] [ [AS] alias]
+      [ USING Using_List ] (used to help define scope of the DELETE when joining across tables)
+      WHERE Predicate
+      [ RETURNING ] * 
+    - Using a cursor with DELETE: (avoid unless necessary)
+    [sql]
+        DECLARE MyCursor CURSOR
+        FOR
+        SELECT * FROM Orders
+        WHERE Employee IN (SELECT Employee FROM Employees WHERE Salary < 50000)
+        FOR UPDATE;
+
+        FETCH FIRST FROM MyCursor;
+
+        DELETE FROM Orders
+        WHERE CURRENT OF MyCursor;
+
+        FETCH NEXT FROM MyCursor;
+        ...
+    [end]
+    - Can use DELETE with views, just use the name of a view instead of the name of a table in statement
+    - Can return from a DELETE, useful for archiving, auditing, moving data between tables
+        - Technically performs two operations, a delete and a select
+END 10:44pm
