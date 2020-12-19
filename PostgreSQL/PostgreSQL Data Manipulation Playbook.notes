@@ -182,3 +182,40 @@ START 10:23pm 2020.12.17
     - Can return from a DELETE, useful for archiving, auditing, moving data between tables
         - Technically performs two operations, a delete and a select
 END 10:44pm
+START 10:40pm 2020.12.18
+- 10 Performing BUlk Deletes:
+    - TRUNCATE - CASCADE truncates any related FK tables
+        - Truncate is faster than delete
+        - Reclaims used space immediately
+        - Not MVCC safe
+    - Ways to delete all table rows:
+        - DELETE
+            - Row by row
+            - Cascading w/ foreign key provided
+            - No side effects
+        - TRUNCATE
+            - All at once
+            - Explicit Cascading with CASCADE keyword - truncates related tables
+            - Explicit IDENTITY control
+        - DROP TABLE
+            - All at once
+            - No Cascading
+            - Everything is gone
+        - Large DELETE Optimizatinos 
+            - Batching
+            - Partitioning
+                - Partitions live beneath the "logical table" that applications interact with
+            - Moving data out
+                - Copy just the rows we need to keep to new table, then drop the old table
+                    - Can also truncate old table, then move data in new table back
+        - Truncates can be rolled back if they occur in a transaction
+        - VACUUM - reclaims space that is "empty"
+        - Partition delete EX:
+        [sql]
+            ... <create table with Key_Column identity column> ...
+            PARTITION BY RANGE (Key_Column);
+            CREATE TABLE Large_Delete_Parition1
+            PARTITION OF Large_Delete_Partitioned
+            FOR VALUES FROM (0) TO (1000000)
+        [end]
+    
