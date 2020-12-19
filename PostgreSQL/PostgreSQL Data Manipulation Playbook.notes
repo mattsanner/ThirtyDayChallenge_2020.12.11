@@ -38,7 +38,7 @@ START 9:32PM 2020.12.15
             - Variables - DECLARE
             - Error handling - RAISE NOTICE, EXCEPTION, WHENEVER
             - Management - SET, backups, replication, stats, VACUUM?
-- 3 What Are Concurrency Challenges?
+- 3 What Are Concurrency Challenges?:
     - ACID Properties Guarantees
         - Atomicity - Indivisible and irreducible series of database operations
         - Consistency - Changes to the database allowed from one valid state to another
@@ -46,7 +46,7 @@ START 9:32PM 2020.12.15
             - Pessimistic - assume there will be conflicts, so take measures to prevent it
             - Optimistic - Assume conflicts are rare, but require validity check before committing
         - Durability - Committed changes survive permanently
-- 4 Understanding ANSI Concurrency Phenomena
+- 4 Understanding ANSI Concurrency Phenomena:
     - Lost Update - If two transaction overlap updating the same data
         - Not possible in PostgreSQL
     - Dirty Read - A read occurs during a write transaction that is later rolled back
@@ -183,7 +183,7 @@ START 10:23pm 2020.12.17
         - Technically performs two operations, a delete and a select
 END 10:44pm
 START 10:40pm 2020.12.18
-- 10 Performing BUlk Deletes:
+- 10 Performing Bulk Deletes:
     - TRUNCATE - CASCADE truncates any related FK tables
         - Truncate is faster than delete
         - Reclaims used space immediately
@@ -218,4 +218,13 @@ START 10:40pm 2020.12.18
             PARTITION OF Large_Delete_Partitioned
             FOR VALUES FROM (0) TO (1000000)
         [end]
-    
+START: 12:20pm 2020.12.19
+- 11 Course Review and Wrap Up:
+    - Take aways:
+        - Concurrency and isolation are serious and complex challenges for relational database management systems
+            - Need to get this correct up front
+        - Modifying data can be expensive, but is manageable
+            - Don't focus architecture around imaginary performance scenarios
+        - SQL is declarative, composable, and flexible - 50 years of use, not common in tech!
+    - 50% of info is lost 1 hour after getting it, 75% within 24 hours, 90% within the week?
+END: 12:33pm
