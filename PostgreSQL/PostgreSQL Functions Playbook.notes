@@ -1,0 +1,5 @@
+START: 12:32pm 2020.12.19
+- 2 Introducing Built In Functions in PostgreSQL
+    - The most important functions have become part of the ANSI standard that ANSI-compliant DBs have to support
+    - TODO: set up docker with test database
+STOP: 12:45pm

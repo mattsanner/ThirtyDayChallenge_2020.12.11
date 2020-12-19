@@ -5,4 +5,4 @@ PostgreSQL Path
 - [x] Combining and Filtering Data with PostgreSQL
 - [x] PostgreSQL Data Manipulation Playbook
 - [ ] Capturing Logic with Custom Functions In PostgreSQL
-- [ ] PostgreSQL Functions Playbook
+- [started] PostgreSQL Functions Playbook
