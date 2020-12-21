@@ -3,3 +3,39 @@ START: 12:32pm 2020.12.19
     - The most important functions have become part of the ANSI standard that ANSI-compliant DBs have to support
     - TODO: set up docker with test database
 STOP: 12:45pm
+START: 10:12pm 2020.12.20
+- Finished setup of test DB
+- 3 Understanding Data Types:
+    - ANSI SQL Data types
+        - Character, Binary, Numeric (exact, approximate), Date/time types, boolean, array
+    - Special PostgreSQL types
+        - UUID, XML (ANSI 2013), JSON (ANSI 2016)
+        - Many others listed, should get to them if relevant
+    - ::<TYPE> - cast
+    - TEXT - PostgreSQL extension to character types
+    - Numerics
+        - Integers (smallint, int(4), bigint)
+        - Arbitrary Precision Numbers (exact) (NUMERIC, DECIMAL)
+        - Floating Point Types (approximate) (FLOAT4, FLOAT8, FLOAT(n))
+        - Monetary Types (exact) - MONEY
+    - Date, Time, Interval Types
+        - timestamps w/ and w/o TZ - two different flavores
+        - INTERVAL - gap between to timestamps
+        - DATE and TIME separately
+    - Boolean
+        - NULL:BOOL = "Unknown"
+    - Array
+        - <type>[][]...
+        - 1 based arrays
+    - UUID
+        - 128 bit value
+        - 10^-37 -> chance of collision
+        - Can adjust groupings
+    - XML
+        - Built in XML validation for valid XML string
+        - SELECT XML "<xml string>" automatically casts
+    - JSON types
+        - JSON, JSONB (B for binary format, faster performance, indexable)
+    - Range types
+        - INT4RANGE, INT8RANGE, TSRANGE, etc.
+STOP: 10:40pm
