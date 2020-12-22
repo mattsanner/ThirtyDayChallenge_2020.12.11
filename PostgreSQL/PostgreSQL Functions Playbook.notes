@@ -41,3 +41,25 @@ START: 10:12pm 2020.12.20
 STOP: 10:40pm
 START: 11:40pm 12.21.2020
 - 4 Doing Math with Operators and Functions:
+    - Math Operators:
+        - Operators were covered in an earlier module
+        - ||/ - cube root, ! - factorial
+        - A number of binary operators exist as well (&, |, #, etc)
+    - Scalar Functions:
+        - LOG(2, 8) - logarithm
+        - LN(42) - natural logarithm
+        - FLOOR, CEIL, DEGREES, RADIANS, etc.
+        - SETSEED(), RANDOM() -> random number
+        - WIDTH_BUCKET(valueToBucket, startRange, endRange, numberOfBuckets);
+    - Trigonometric Functions:
+        - SIN, COS, TAN, arc counterparts lead with a
+        - SIND, COSD, COTD, TAND - trig functions w/ degress parameters
+    - Aggregate functions: already covered
+    - Statistical Analysis: 18 stat functions supported - variance, correlation, standard deviance, etc.
+        - Ordered set aggregation functions also exist
+    - Formatting functions:
+        - TO_NUMBER('1,000', '9,999')::INT - first parameter is string to parse, second is format string
+            - 'SL' - locale based money symbol
+            - 'D' - locale based comma
+        - TO_CHAR() - converts number to formatted string
+STOP: 11:59PM :)
