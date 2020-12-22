@@ -39,3 +39,5 @@ START: 10:12pm 2020.12.20
     - Range types
         - INT4RANGE, INT8RANGE, TSRANGE, etc.
 STOP: 10:40pm
+START: 11:40pm 12.21.2020
+- 4 Doing Math with Operators and Functions:
