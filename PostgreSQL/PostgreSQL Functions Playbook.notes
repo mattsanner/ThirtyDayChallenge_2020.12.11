@@ -63,3 +63,35 @@ START: 11:40pm 12.21.2020
             - 'D' - locale based comma
         - TO_CHAR() - converts number to formatted string
 STOP: 11:59PM :)
+START: 9:40pm 2020.12.22
+- 5 Handling Character Data with String Functions and Operators:
+    - Using ANSI Functions and Operators:
+        - || - character concat
+            - Non character values are coerced to characters if possible
+        - CHAR_LENGTH - length in characters, also LENGTH()
+        - POSITION(string_to_find IN string_containing)
+    - Using PostgreSQL Extensions:
+        - LTRIM, RTRIM, LPAD, RPAD - trim and pad extensions
+    - Aggregating textual data:
+        - Lots to see here, specific to use cases though.
+    - Pattern Matching:
+        - LIKE 'S%; - S then any characters
+        - LIKE '_r%'; - starting with one character, r, any characters
+        - Full posix regex is not supported, but large subset is
+        - Negate pattern matching - NOT SIMILAR TO
+    - Matching Using Regular Expression:
+        - REGEXP_MATCH() - returns array of substring matches
+        - REGEXP_MATCHES() - returns a set of arrays of matches
+        - REGEXP_REPLACE() - matches then replaces a given string
+        - REGEXP_SPLIT_TO_ARRAY() - returns array of split strings
+        - REGEXP_SPLIT_TO_TABLE() - returns table of matches, one row per match
+    - Searching Natural Language Documents:
+        - Lots of text search operators - need to dig deeper in to examples to really understand what is going on here
+    - Converting and Formatting Functions:
+        - CONVERT(string_to_convert, source_encoding, destination_Encoding) - converts string from source to destination encoding
+            - CONVERT_FROM(), CONVER_TO() are subsets of this
+        - FORMAT(placeholder_string, any, number, of, strings_to_pass_in)
+            - Format of specifiers - %[arg_position][flags][width]type
+                - Flag and width must be used together
+                - type: s for text, I format argument as SQL identifier, L for SQL literal
+STOP: 10:00pm
