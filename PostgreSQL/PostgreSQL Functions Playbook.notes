@@ -95,3 +95,31 @@ START: 9:40pm 2020.12.22
                 - Flag and width must be used together
                 - type: s for text, I format argument as SQL identifier, L for SQL literal
 STOP: 10:00pm
+START: 8:32pm 2020.12.25
+- 6 Time Travel with Date and Time Functions:
+    - MAKE_DATE, MAKE_TIME, MAKE_TIMESTAMP - all functions to parse a date/time from parameterized pieces
+    - DATE_PART('field', source);
+        - Fields - Millienium, century, decade, year, quarter, month.. etc.
+    - EX:
+    [sql]
+        SELECT
+            DATE '20190301' + 13 AS "pi day, 2019" - 2019-03-14
+            '20190328'::DATE - 13 - 2019-03-15
+            TIME '23:59:59' + INTERVAL '1 SECOND' - 00:00:00
+
+    [end]
+    - EPOCHS - 
+    [sql]
+        SELECT
+            EXTRACT(EPOCH FROM TIMESTAMPTZ '2019-12-28 15:03:10.50-01:00') -
+            EXTRACT(EPOCH FROM TIMESTAMPTZ '2019-09-28 09:05:20.50+01:00')
+    [end]
+    - results in 7891070.0
+    - Formatting timestamps
+    [sql]
+        SELECT
+            CURRENT_TIMESTAMP,
+            TO_CHAR('2019-10-7T11:55:55-4:00'::TIMESTAMPTZ, 'FMMonth DDth YYYY hh:mm:ss tz');
+    [end] 
+        - October 07th 2019 03:10:15 utc
+STOP 8:47pm 
