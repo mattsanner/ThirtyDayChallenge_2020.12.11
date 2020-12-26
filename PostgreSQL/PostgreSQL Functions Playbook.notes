@@ -123,3 +123,62 @@ START: 8:32pm 2020.12.25
     [end] 
         - October 07th 2019 03:10:15 utc
 STOP 8:47pm 
+START 10:47am 2020.12.26
+    - Tried out a number of examples:
+    [sql]
+        SELECT orderid, prod_id, quantity,
+        SUM(quantity) OVER (PARTITION BY orderid ORDER BY prod_id
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as "Default frame",
+        SUM(quantity) OVER(PARTITION BY orderid ORDER BY prod_id
+            ROWS 2 PRECEDING) as "2 preceding",
+        SUM(quantity) OVER(PARTITION BY orderid ORDER BY prod_id
+            ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING) AS "2 following",
+        SUM(quantity) OVER(PARTITION BY orderid ORDER BY prod_id
+            ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS "Entire window"
+        FROM orderlines
+        WHERE orderid = 1
+        LIMIT 5;
+    [end]
+    - window_function
+    [sql]
+        SELECT
+            window_function(exp1, exp2, ...)
+                FILTER (WHERE filter_clause)
+                OVER(
+                    PARTITION BY exp1, exp2, ...
+                    ORDER BY exp1, exp2, ...
+                    { RANGE | ROWS | GROUPS }
+                        {
+                            frame_start | frame_start frame_exclusion
+                            | BETWEEN frame_start and frame_end
+                            | BETWEEN frame_start and frame_end frame_exclusion
+                        }
+                )
+        frame_start and frame_end:
+            UNBOUNDED PRECEDING
+            offset PRECEDING
+            CURRENT ROW
+            offset FOLLOWING
+            UNBOUNDED FOLLOWING
+        
+        frame_exclusion:
+            EXCLUDE { CURRENT_ROW | GROUP | TIES | NO OTHERS }
+    [end]
+    - Can declare window usages in SELECT -  big example with VALUES defined:
+    [sql]
+    SELECT a, n,
+        LAG(n) OVER w1 AS "Previous row",
+        LEAD(n) OVER w1 AS "Next row",
+        LAG(n, 2) OVER w2 AS "Lag by 2, DESC",
+        LEAD(n, 2, 42) OVER w2 AS "Default value",
+        FIRST_VALUE(n) OVER w1,
+        LAST_VALUE(n) OVER w1,
+        NTH_VALUE(n, 2) OVER w2 AS "2nd from end",
+        ROW_NUMBER() OVER w1 AS "rn"
+    FROM (VALUES('a', 1), ('a',2), ('b',1), ('b', 2), ('b', 3)) v(a,n)
+    WINDOW
+        w1 AS (PARTITION BY a ORDER BY n ASC),
+        w2 AS (PARTITION BY a ORDER BY n DESC)
+    ORDER BY a, n;
+    [end]
+STOP: 11:15am
