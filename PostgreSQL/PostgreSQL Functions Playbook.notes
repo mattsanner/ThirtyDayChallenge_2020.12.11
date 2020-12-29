@@ -182,3 +182,38 @@ START 10:47am 2020.12.26
     ORDER BY a, n;
     [end]
 STOP: 11:15am
+
+START: 2020.12.29 3:54pm
+- 8 Controlling Results with Subquery and Conditional Functions:
+    - EXISTS Function:
+        - Returns true if subquery returns any result
+        - Stops whenever the first match is found
+        - NOT EXISTS is equivalent to LEFT JOIN, but more efficient.
+    - IN Function:
+        - Equivalent to an INNER JOIN, but more efficient (may not have to execute across the full dataset)
+        - In PostgreSQL null != null and nothing != null
+    - ANY Function:
+        - (aka some, aggregates OR to compare the condition to each row until one is true)
+    - ALL Function:
+        - &&s together comparison of a conditional to each row
+        - Same as NOT IN
+- 9 Using Array and Range Functions:
+    - Constructing Arrays and Ranges:
+        - range_type (lower bound, upper bound, open_closed) - open_closed = '[]', '[)', '(]', '()'
+            - [ - closed, ( - open
+        - Ranges can be open/closed, arrays are not
+        - Creating an array
+        [sql]
+        CREATE TEMP TABLE a_table(a TEXT []);
+        INSERT INTO a_table VALUES('{a, b, c}');
+        SELECT * FROM a_table;
+        [end]
+    - Using Operators on Ranges:
+        - Inclusion operators - @>, <@, && 
+            -  Contains, contained by, overlaps
+        - Range operators - << >> &< &> -|- + * - 
+            - Strictly left, strictly right, does not extend to right of, does not extend to left of, adjacent to, union, intersection, difference
+        - || concats arrays
+    - Range and array functions:
+        - Lots of functions to use to create arrays, find items within an array, same for Ranges
+STOP: 4:17pm
