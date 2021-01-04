@@ -201,7 +201,7 @@ START: 2020.12.29 3:54pm
     - Constructing Arrays and Ranges:
         - range_type (lower bound, upper bound, open_closed) - open_closed = '[]', '[)', '(]', '()'
             - [ - closed, ( - open
-        - Ranges can be open/closed, arrays are not
+        - Ranges can be open/closed and only hold boundary values, arrays are not
         - Creating an array
         [sql]
         CREATE TEMP TABLE a_table(a TEXT []);
@@ -223,3 +223,6 @@ START: 2021.1.1 11:21 59PM
 STOP: 11:31pm
 START: 2021.1.2 Committing to 1 extra hour in the next week for today
 STOP: 2021.1.2
+START: 2021.1.3 9:00pm
+- Finished review for last course. Browsing other PostgreSQL modules/other options
+STOP: 2021.1.3 9:11pm
