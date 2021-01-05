@@ -1,0 +1,35 @@
+START: 2021.01.04 - 10:17pm
+SOLID Principle - Open/Closed:
+    - Base - entities should be open for extension but closed to modification
+    - It should be possible to change the behavior of a method without editing its source Consider
+    - Simpler, more maintainable code and methods result
+    - Balance abstraction and concreteness
+        - Abstraction adds complexity
+    - '"new" is glue'
+    - How to predict future changes to find when abstraction is helpful:
+        - Start concrete
+        - Modify the code the first time or two
+        - By third change, abstraction should be the go-forward
+    - Typical approaches:
+        - Parameters
+        - Inheritance
+        - Composition/Injection
+        - Extensions
+    - Prefer implementing new classes for new features
+        - Allows you to build a  class that suits the problem at hand
+        - Nothing in the system depends on it (yet)
+        - Adds behavior without touching existing code
+        - Can follow SRP (single responsibility principle)
+        - Can be unit-tested
+    - Switch cases can be considered for Factory refactor
+    - Package design:
+        - Closed for modification
+            - Consumers cannot change package contents
+            - Should not break consumers when new behavior is added
+        - Open to extension
+            - Can extend classes from package to add specific behavior to your app
+    - Solve problem first, simply
+    - Identify what changes the app will likely continue to need
+    - Modify code to be extensible along the axis of change identified
+        - WITHOUT the need to modify its source 
+STOP: 2021.01.04 10:38pm
