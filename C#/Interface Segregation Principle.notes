@@ -33,3 +33,43 @@ SOLID Principle - Open/Closed:
     - Modify code to be extensible along the axis of change identified
         - WITHOUT the need to modify its source 
 STOP: 2021.01.04 10:38pm
+START: 2021.01.05 9:52pm
+SOLID Principle - Interface Segregation Principle:
+    - More dependencies:
+        - More coupling
+        - More brittle code
+        - More difficult to test
+        - More difficult deployments
+    - Detecting ISP Violations in code
+        - Large interfaces
+        - NotImplementedExceptions
+        - Code uses a small subset of a larger interface
+    - Multiple Interface Inheritance in C#
+        - Bigger interfaces can implement multiple smaller interfaces
+    - EX:
+        - Old/bad:
+            - INotificationService
+                - SendText()
+                - SendEmail()
+        - New/good:
+            - IEmailService
+                - Send()
+            - ITextService
+                - Send()
+        - For existing code that uses INotificationService, we can use multiple inheritance:
+            - Allows new code to use their specific interface
+            - Allows old code to remain untouched.
+    - Pain Driven Development
+        - Use ISP to indentify what is causing pain points in app, then leverage ISP to solve the issues
+    - Fixing ISP Violations
+        - Break up large interfaces into smaller ones
+            - Compose fat interfaces from smaller ones for backward compatibility (as described above)
+        - If you can't control large interfaces you have to use
+            - Create a small, cohesive interface
+            - Use the adapter design pattern so code only has to interface with adapter that knows about the larger legacy interface
+        - Clients should own and define their interfaces
+    - Microsoft Reference Application + eBook:
+        - github.com/dotnet-architecture/eShopOnWeb
+    - Clean Architecture Solution Templates
+        - github.com/ardalis/CleanArchitecture
+STOP: 10:17pm
