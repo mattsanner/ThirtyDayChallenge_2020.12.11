@@ -73,3 +73,48 @@ SOLID Principle - Interface Segregation Principle:
     - Clean Architecture Solution Templates
         - github.com/ardalis/CleanArchitecture
 STOP: 10:17pm
+START: 2021.01.07 9:35pm
+SOLID Principle - Dependency Inversion
+    - High level modules should not depend on low-level modules
+        - Both depend on abstractions
+    - Abstractions should not depend on details, details should depend on abstractions
+    - Dependencies in C#
+        - Compile-time
+        - Run-time
+    - Related PluralSight courses:
+        - "Creating N-Tier Applications in C#"
+        - "Domain-Driven Design Fundamentals"
+    - High level
+        - Process oriented, not detail oriented
+        - Further from I/O (DB, files, input, etc.)
+    - Low level
+        - "Plumbing" code
+        - Closer to I/O
+        - How software interacts with external systems and hardware
+    - Abstractions in C#
+        - interfaces
+        - Abstract base classes
+        - Types you can't instantiate
+    - Details and Abstractions
+        - Abstractions should not be couple to details
+        - Abstractions describe WHAT
+            - Send a message
+            - Store a Customer record
+        - Details specify HOW
+            - Send an SMTP email over port 25
+            - Serialize customer to JSON and store as text file
+    - NEW is GLUE
+    - Explicit dependencies Principle
+        - Classes should not surprise clients with dependences
+        - Classes should list dependencies up front in constructor
+    - Abstractions should not leak details
+    - Most classes should depend on the abstractions, not the implementation details
+    - Classes should be explicit about their dependencies
+    - Clients should inject dependencies when they create other classes
+SOLID Principles Review:
+    - Single responsibility <-> Interface Segregation - promotes small cohesive Types
+    - Interface Segregation <-> Liskov Substitution - Interfaces must be FULLY implemented
+    - SR <-> Open/Close <-> Interface Segregation - Add functionality by adding more classes
+    - Open/Close <-> Dependency Inversion - Change behavior by passing in different dependencies
+    - Interface Segregation <-> Dependency Inversion - Details depend on interfaces
+STOP: 10:17pm

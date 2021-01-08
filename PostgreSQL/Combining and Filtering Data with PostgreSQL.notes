@@ -92,3 +92,25 @@ START 12.13.2020 7:15pm
             - Returns records that only exist in TABLE A
     - ALL is essentially the opposite of DISTINCT
 STOP 7:42pm
+
+START 2020.01.06 9:23pm
+- 6 Implementing Subqueries:
+    [sql]
+        SELECT a.store_name
+               a.store_location
+          FROM stores a
+         WHERE a.store_name IN
+            (SELECT store_name
+               FROM orders
+              WHERE order_value > 500);
+    [end]
+    - JOIN vs Subquery:
+        - Primary purpose of a join is to combine rows from tables based on a match condition
+        - A subquery returns a single value (scalar) or row set that is immediately available for use in outer query
+        - Subquery is generally more performant, inner join can be more readable though
+            - The join would join across all rows then calculate, the subquery can condense data to subset before combining data between tables
+        - Correlated subqueries:
+            - A subquery that uses values from the primary query
+            - Subquery is evaluated for each row processed by the primary query
+STOP 9:34 pm
+
