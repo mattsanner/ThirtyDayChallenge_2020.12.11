@@ -1,0 +1,30 @@
+START: 2020.01.09 3:30pm
+- JSX - Javascript Expressions
+- No CSS or special language
+- Style names and values match CSS, components can have their own stylesheets
+- Flexbox for layout
+- React Native supports hot reloading
+- Expo is a beginner framework
+    - All JS, no native code. No need for XCode or Android Studio
+- Ignite
+    - Boilerplate kit with best-practices built in
+    - Style guides, themes, and pattern library out of the box
+    - API Testing built in
+- Testing in React Native
+    - Jest
+        - Powerful mock library
+        - Built in code coverage report
+        - Runs only test files related to changed files
+        - Supports snapshot testing
+    - Detox - End to end testing
+        - Emulates a user testing experience
+        - Runs on an emulator
+- Push Notification Services
+    - Expo - built in
+    - One Signal - separate service, makes money through sharing that notification info
+    - Firebase Cloud Messaging
+    - AWS Amplify
+- Deployments
+    - Over the Air Updates (OTA) using CODEPUSH (good for quick fixes, minor updates)
+    - FASTLANE to both app stores
+END: 4:20pm
