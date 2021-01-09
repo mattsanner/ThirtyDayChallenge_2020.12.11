@@ -118,3 +118,15 @@ SOLID Principles Review:
     - Open/Close <-> Dependency Inversion - Change behavior by passing in different dependencies
     - Interface Segregation <-> Dependency Inversion - Details depend on interfaces
 STOP: 10:17pm
+START: 2021.01.08 10:50pm
+SOLID Principle - Single Responsibility Principles
+    - Single Responsibility Principle
+        - Uncle Bob
+        - Each software module (class, function, etc.) should have one and only one reason to change
+    - Separate the WHAT from the HOW
+    - What is a Responsibility?
+        - Persistence, logging, validation, biz logic
+    - Responsibilites change at different times for different reasons
+    - "Axes of change" - the ways in which your app may change
+    - Class elements should belong together, cohesion
+STOP: 11:05pm
