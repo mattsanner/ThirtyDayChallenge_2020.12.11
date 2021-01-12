@@ -1,5 +1,9 @@
-START: 2020.01.10 9\6:45pm
+START: 2020.01.10 6:45pm
 - Alternatives:
     - Purescript
     - Flutter
 STOP: 6:54pm
+START: 2021.01.11 7:55pm
+- Started repo https://github.com/mattsanner/PSReactNativeCourse
+- Got everything installed, shell app running locally
+STOP: 8:30pm
