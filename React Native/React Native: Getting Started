@@ -17,3 +17,6 @@ STOP: 9:23pm
 START: 2021.01.15 8:10pm
 - Troubleshooting app build, outdated packages seem to be causing issues
 STOP: 2021.01.15 8:24pm
+START: 2021.01.16 1:30pm 
+- Trying a different project initialization approach to avoid weird build issues.
+STOP: 
