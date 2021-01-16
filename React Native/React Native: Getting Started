@@ -14,3 +14,6 @@ STOP: 8:05pm
 START: 2021.01.13 8:30pm
 - Continued development in example react app
 STOP: 9:23pm
+START: 2021.01.15 8:10pm
+- Troubleshooting app build, outdated packages seem to be causing issues
+STOP: 2021.01.15 8:24pm
