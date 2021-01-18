@@ -19,4 +19,8 @@ START: 2021.01.15 8:10pm
 STOP: 2021.01.15 8:24pm
 START: 2021.01.16 1:30pm 
 - Trying a different project initialization approach to avoid weird build issues.
-STOP: 
+STOP: 2:30pn
+
+START 2021.01.17 7:50pm
+- Running into too many build issues with the old repo code. Going to continue through vids to quickly get an idea of what is going on and try another course after
+STOP: 8:21pm
