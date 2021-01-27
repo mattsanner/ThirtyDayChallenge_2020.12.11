@@ -228,3 +228,5 @@ START: 12:20pm 2020.12.19
         - SQL is declarative, composable, and flexible - 50 years of use, not common in tech!
     - 50% of info is lost 1 hour after getting it, 75% within 24 hours, 90% within the week?
 END: 12:33pm
+
+2021.01.26 - Revisited the postgres tutorials/notes for CTE and bulk insert info.
